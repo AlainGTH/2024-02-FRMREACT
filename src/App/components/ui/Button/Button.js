@@ -1,9 +1,10 @@
-import {View, Text, TouchableOpacity, StyleSheet} from 'react-native';
+import {View, Text, TouchableOpacity} from 'react-native';
 import React from 'react';
-import styles from './Button.styles';
+import Styles from './Button.styles';
 import PropTypes from 'prop-types';
 
 const Button = props => {
+  //const getChildren()=>{return props.children;}
   console.log(props);
   return (
     <TouchableOpacity
@@ -11,18 +12,22 @@ const Button = props => {
         props.onButtonClicked();
         console.log('button clicked');
       }}>
-      <View style={[styles.vue, props.style, {backgroundColor: props.bgColor}]}>
-        <Text style={[styles.text, {color: props.color}]}>
-          {props.children}
-        </Text>
+      <View style={[Styles.vue, props.style, {backgroundColor: props.bgColor}]}>
+        {typeof props.children === 'string' ? (
+          <Text style={[Styles.text, {color: props.color}]}>
+            {props.children}
+          </Text>
+        ) : (
+          props.children
+        )}
       </View>
     </TouchableOpacity>
   );
 };
 
-Button.PropTypes = {
+Button.propTypes = {
   style: PropTypes.object,
-  children: PropTypes.string.isRequired,
+  children: PropTypes.any.isRequired,
   bgColor: PropTypes.string,
   color: PropTypes.string,
   onButtonClicked: PropTypes.func.isRequired,

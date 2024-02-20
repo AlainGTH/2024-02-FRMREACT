@@ -2,19 +2,16 @@ import {StyleSheet} from 'react-native';
 
 const styles = StyleSheet.create({
   vue: {
-    padding: 10,
-    backgroundColor: 'forestgreen',
+    flexDirection: 'row',
     alignItems: 'center',
-    margin: 3,
   },
-  text: {
+  buttontext: {
     fontWeight: 'bold',
     fontSize: 14,
     textDecorationStyle: 'solid',
-    textDecorationLine: 'underline',
     color: 'white',
   },
-  image: {
+  buttonimage: {
     width: 64,
     height: 64,
   },
