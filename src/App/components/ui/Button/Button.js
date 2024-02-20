@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 
 const Button = props => {
   //const getChildren()=>{return props.children;}
-  console.log(props);
+  //console.log(props);
   return (
     <TouchableOpacity
       onPress={() => {
