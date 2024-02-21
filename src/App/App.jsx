@@ -1,59 +1,28 @@
-import React, {useEffect, useState} from 'react';
-import {View, Text, ToastAndroid, Image} from 'react-native';
-import Button from './components/ui/Button/Button';
-import Styles from './App.styles';
+import React, {useState} from 'react';
+import {View} from 'react-native';
+import styles from './App.styles';
+import {cars} from '../../db/db.json';
+import FiltrableCarList from './components/ui/FiltrableCarList/FiltrableCarList';
+import CarViewer from './components/ui/CarViewer/CarViewer';
 
+const initialState = cars;
 function App() {
-  //let counter = 0;
-  const [counter, setCounter] = useState(1);
-  useEffect(() => {
-    //Creation Update
-    console.log('Use Effect: ', counter);
-    return () => {
-      //Destruction
-    };
-  }, [counter]);
-  useEffect(() => {
-    //Creation Update
-    setCounter(0);
-    return () => {
-      //Destruction
-    };
-  }, []);
+  const [cars, setCar] = useState(initialState);
+  const [current, setCurrent] = useState(undefined);
+
   return (
     <View>
-      <Text>Hello counter: {counter}</Text>
-      <Button
-        onButtonClicked={arg => {
-          ToastAndroid.show('Ajouter clicked depuis App', ToastAndroid.SHORT);
-          //counter++;
-          setCounter(counter + 1);
-          console.log(counter);
+      <FiltrableCarList
+        cars={cars}
+        selectedCar={current}
+        onUpdateSelect={c => {
+          if (current !== undefined && current === c) {
+            setCurrent(undefined);
+          } else {
+            setCurrent(c);
+          }
         }}
-        bgColor="skyblue">
-        <View>
-          <Image
-            source={require('../../assets/img/plus.png')}
-            style={Styles.buttonimage}
-          />
-          <Text style={Styles.buttontext}>Ajouter</Text>
-        </View>
-      </Button>
-      <Button
-        onButtonClicked={arg => {
-          ToastAndroid.show('Suprimer clicked depuis App', ToastAndroid.SHORT);
-          setCounter(counter - 1);
-          console.log(counter);
-        }}
-        bgColor="red">
-        <View style={Styles.vue}>
-          <Image
-            source={require('../../assets/img/minus.png')}
-            style={Styles.buttonimage}
-          />
-          <Text style={[Styles.buttontext, {color: 'yellow'}]}>Supprimer</Text>
-        </View>
-      </Button>
+      />
     </View>
   );
 }
